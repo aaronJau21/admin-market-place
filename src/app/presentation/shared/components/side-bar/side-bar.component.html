@@ -1,0 +1,25 @@
+<div class="flex justify-between px-9 items-center w-full mt-5">
+  <img src="/logo.jpeg" alt="Logo del Market Place" class="w-20 rounded-full" />
+  <span
+    (click)="clickShow()"
+    class="fa-solid fa-arrow-left text-xl text-white cursor-pointer"
+  ></span>
+</div>
+
+<nav class="mt-7 px-5">
+  <ul>
+    @for (item of router(); track item.title) {
+    <li
+      class="text-white flex items-center gap-x-3 text-xl hover:pl-5 transition-all mb-3"
+    >
+      <a
+        [routerLink]="item.path"
+        routerLinkActive="bg-gray-500 bg-opacity-20 p-3 rounded"
+      >
+        <span [class]="item.data?.['icon']"></span>
+        {{ item.title }}
+      </a>
+    </li>
+    }
+  </ul>
+</nav>
