@@ -1,0 +1,45 @@
+<div class="bg-white h-20 px-9 relative">
+  <div class="flex justify-end items-center h-full">
+    <div
+      class="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100"
+    >
+      <div class="relative">
+        <span class="fa-solid fa-inbox text-xl text-gray-500"></span>
+        <span
+          class="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-white"
+        >
+          3
+        </span>
+      </div>
+    </div>
+    <div
+      class="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100"
+    >
+      <div class="relative">
+        <span class="fa-solid fa-bell text-xl text-gray-500"></span>
+        <span
+          class="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-white"
+        >
+          3
+        </span>
+      </div>
+    </div>
+    <div>
+      <span
+        class="fa-solid fa-circle-user text-xl"
+        (click)="clickShow()"
+      ></span>
+
+      @if (showMenu()) {
+      <div
+        [ngClass]="{
+          'animate__animated animate__fadeIn': showMenu()
+        }"
+        class="absolute bg-white w-52 h-96 right-9 mt-5 shadow-lg"
+      >
+        <p>Logout</p>
+      </div>
+      }
+    </div>
+  </div>
+</div>

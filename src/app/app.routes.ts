@@ -1,16 +1,22 @@
 import { Routes } from '@angular/router';
+
 import { LoginPageComponent } from './presentation/shared/page/login-page/login-page.component';
 import { AdminLayoutComponent } from './presentation/module/admin/layout/admin-layout/admin-layout.component';
 import { SellerLayoutComponent } from './presentation/module/seller/layout/seller-layout/seller-layout.component';
 import { adminAuthGuard } from './lib/shared/auth/guard/admin-auth.guard';
 import { sellerAuthGuard } from './lib/shared/auth/guard/seller-auth.guard';
 import { unauthorizedGuard } from './lib/shared/auth/guard/unauthorized.guard';
+import { RegisterComponent } from './presentation/shared/page/register/register.component';
 
 export const routes: Routes = [
   {
     path: 'login',
     canActivate: [unauthorizedGuard],
     component: LoginPageComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
   {
     path: 'dashboard',

@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { AdminService } from '../services/admin.service';
+import { AuthService } from '../services/auth.service';
 import { injectMutation } from '@tanstack/angular-query-experimental';
-import { ILoginRequest } from '../../../../domain/interfaces/auth/ilogin-request';
+import { ILoginRequest } from '../../../../domain';
 import { lastValueFrom } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -10,20 +10,20 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class UseCase {
-  private readonly adminService = inject(AdminService);
+  private readonly authService = inject(AuthService);
   private toastr = inject(ToastrService);
   private router = inject(Router);
 
   public loginMutation = injectMutation(() => ({
     mutationFn: (loginRequest: ILoginRequest) =>
-      lastValueFrom(this.adminService.Login(loginRequest)),
+      lastValueFrom(this.authService.Login(loginRequest)),
     onSuccess: (data) => {
       if (data.user && data.user.role === 'admin') {
-        this.adminService.saveLocalStorage(data);
+        this.authService.saveLocalStorage(data);
         this.toastr.success('Login admin', 'Success');
         this.router.navigateByUrl('/dashboard/admin');
       } else {
-        this.adminService.saveLocalStorage(data);
+        this.authService.saveLocalStorage(data);
         this.toastr.success('Login user', 'Success');
         this.router.navigateByUrl('/seller-dashboard/seller');
       }

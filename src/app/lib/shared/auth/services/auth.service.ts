@@ -1,14 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../../environments/environment.development';
-import { ILoginRequest } from '../../../../domain/interfaces/auth/ilogin-request';
+import {
+  ILoginRequest,
+  ILoginResponse,
+  IRegisterRequest,
+  IRegisterResponse,
+} from '../../../../domain';
 import { Observable } from 'rxjs';
-import { ILoginResponse } from '../../../../domain/interfaces/auth/ilogin-response';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AdminService {
+export class AuthService {
   private readonly http = inject(HttpClient);
   private readonly API_URL = environment.API_URL;
 
@@ -16,6 +20,13 @@ export class AdminService {
     return this.http.post<ILoginResponse>(
       `${this.API_URL}/auth/login`,
       loginRequest
+    );
+  }
+
+  public register(data: IRegisterRequest): Observable<IRegisterResponse> {
+    return this.http.post<IRegisterResponse>(
+      `${this.API_URL}/auth/register`,
+      data
     );
   }
 

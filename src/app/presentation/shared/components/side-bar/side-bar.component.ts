@@ -6,7 +6,7 @@ import { routes } from '../../../../app.routes';
   selector: 'shared-side-bar',
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.css'], // Corregido: styleUrls en vez de styleUrl
+  styleUrls: ['./side-bar.component.css'],
 })
 export class SideBarComponent implements OnInit {
   public router = signal<Routes>([]);
@@ -21,11 +21,11 @@ export class SideBarComponent implements OnInit {
   public getRoutes() {
     if (this.role === 'admin') {
       this.router.set(
-        routes[1].children?.filter((route) => route.title) as Routes
+        routes[2].children?.filter((route) => route.title) as Routes
       );
     } else {
       this.router.set(
-        routes[2].children?.filter((route) => route.title) as Routes
+        routes[3].children?.filter((route) => route.title) as Routes
       );
     }
   }
