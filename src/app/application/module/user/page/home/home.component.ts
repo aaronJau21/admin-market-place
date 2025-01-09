@@ -4,8 +4,9 @@ import { Component } from '@angular/core';
   selector: 'app-home',
   imports: [],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
+  host: {
+    class: 'flex-1',
+  },
 })
-export default class HomeComponent {
-
-}
+export default class HomeComponent {}
