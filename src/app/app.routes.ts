@@ -3,6 +3,7 @@ import { LoginComponent } from './application/shared/page/login/login.component'
 import { DasboardComponent } from './application/layout/admin/dasboard.component';
 import { authGuard, notAuthGuard } from './infraestructure';
 import { RegisterComponent } from './application/shared/page/register/register.component';
+import { authUserGuard } from './infraestructure/auth/guard/auth-user.guard';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,7 @@ export const routes: Routes = [
   // users
   {
     path: 'dashboard-user',
+    canActivate: [authUserGuard],
     loadComponent: () =>
       import('./application/layout/user/user-dashboard.component'),
     loadChildren: () => import('./application/module/user/user.routes'),
