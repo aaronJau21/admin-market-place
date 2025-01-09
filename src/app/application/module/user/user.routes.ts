@@ -6,6 +6,10 @@ export default [
     loadComponent: () => import('./page/home/home.component'),
   },
   {
+    path: 'profile',
+    loadComponent: () => import('./page/profile/profile.component'),
+  },
+  {
     path: '',
     redirectTo: '/dashboard-user/home',
     pathMatch: 'full',

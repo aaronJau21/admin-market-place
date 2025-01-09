@@ -3,7 +3,6 @@ import { LoginComponent } from './application/shared/page/login/login.component'
 import { DasboardComponent } from './application/layout/admin/dasboard.component';
 import { authGuard, notAuthGuard } from './infraestructure';
 import { RegisterComponent } from './application/shared/page/register/register.component';
-import { UserDashboardComponent } from './application/layout/user/user-dashboard.component';
 
 export const routes: Routes = [
   {
@@ -26,7 +25,8 @@ export const routes: Routes = [
   // users
   {
     path: 'dashboard-user',
-    component: UserDashboardComponent,
+    loadComponent: () =>
+      import('./application/layout/user/user-dashboard.component'),
     loadChildren: () => import('./application/module/user/user.routes'),
   },
   // default
