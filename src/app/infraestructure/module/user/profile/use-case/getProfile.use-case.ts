@@ -16,5 +16,6 @@ export class GetProfileUseCase {
   getProfile = injectQuery(() => ({
     queryKey: ['profile', this.user().id],
     queryFn: () => lastValueFrom(this.profileService.getProfile()),
+    // throwOnError: true,
   }));
 }

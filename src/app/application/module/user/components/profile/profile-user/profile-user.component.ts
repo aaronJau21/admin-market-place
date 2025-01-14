@@ -1,13 +1,36 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, effect } from '@angular/core';
 import { GetProfileUseCase } from '../../../../../../infraestructure';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'component-profile-user',
   imports: [],
   templateUrl: './profile-user.component.html',
-  styleUrl: './profile-user.component.css',
+  styleUrls: ['./profile-user.component.css'],
 })
-export class ProfileUserComponent {
-  public readonly getProfileUseCase = inject(GetProfileUseCase);
+export class ProfileUserComponent implements OnInit {
+  private readonly getProfileUseCase = inject(GetProfileUseCase);
+  private readonly router = inject(Router);
+
   public getProfileQuery = this.getProfileUseCase.getProfile;
+
+  constructor() {
+    effect(() => {
+      this.checkForErrors();
+    });
+  }
+
+  ngOnInit(): void {
+    this.checkForErrors();
+  }
+
+  public checkForErrors() {
+    const error = this.getProfileQuery.error();
+    console.log('Error: ', error?.message);
+    if (error) {
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+      this.router.navigate(['/auth/login']);
+    }
+  }
 }
