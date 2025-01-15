@@ -26,7 +26,6 @@ export class ProfileUserComponent implements OnInit {
 
   public checkForErrors() {
     const error = this.getProfileQuery.error();
-    console.log('Error: ', error?.message);
     if (error) {
       localStorage.removeItem('user');
       localStorage.removeItem('token');

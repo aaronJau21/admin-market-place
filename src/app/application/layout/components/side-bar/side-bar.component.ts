@@ -18,7 +18,6 @@ export class SideBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRouteItem();
-    console.log(this.routes().filter((route) => route.data));
   }
 
   private getRouteItem() {
