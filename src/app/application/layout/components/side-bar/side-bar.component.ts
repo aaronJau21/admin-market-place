@@ -1,7 +1,9 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Route, RouterLink, RouterLinkActive } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import routes from '../../../module/user/user.routes';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { AuthUseCase } from '../../../../infraestructure';
 
 @Component({
   selector: 'side-bar',
@@ -13,8 +15,10 @@ import routes from '../../../module/user/user.routes';
   },
 })
 export class SideBarComponent implements OnInit {
+  private readonly authUseCase = inject(AuthUseCase);
   public routes = signal(routes);
   public routeItem = signal<Route[]>([]);
+  public faArrowRi = faArrowRight;
 
   ngOnInit(): void {
     this.getRouteItem();
@@ -23,5 +27,10 @@ export class SideBarComponent implements OnInit {
   private getRouteItem() {
     const data = this.routes().filter((route) => route.data);
     this.routeItem.set(data);
+  }
+
+  public logout() {
+    console.log('logout')
+    this.authUseCase.mutationLogout.mutate('');
   }
 }

@@ -34,4 +34,13 @@ export class AuthUseCase {
     onSuccess: (data) => this.handleSuccess(data),
     onError: console.log,
   }));
+
+  mutationLogout = injectMutation(() => ({
+    mutationFn: () => lastValueFrom(this.authService.logout()),
+    onSuccess: () => {
+      this.authService.deleteData();
+      this.router.navigateByUrl('/login');
+    },
+    onError: console.log,
+  }));
 }

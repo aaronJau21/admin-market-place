@@ -13,5 +13,12 @@
       <small className="text-xs font-medium">{{ route.title }}</small>
     </a>
     }
+    <button
+      (click)="logout()"
+      class="cursor-pointer flex h-16 w-16 flex-col items-center justify-center gap-1 text-fuchsia-900 dark:text-gray-400"
+    >
+      <fa-icon [icon]="faArrowRi"></fa-icon>
+      <span className="text-xs font-medium">Salir</span>
+    </button>
   </nav>
 </div>

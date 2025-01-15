@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {
   ILoginRequest,
@@ -29,5 +29,19 @@ export class AuthService {
   public saveData(data: ILoginResponse) {
     localStorage.setItem('token', data.token);
     localStorage.setItem('user', JSON.stringify(data.user));
+  }
+
+  public deleteData() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  }
+
+  public logout(): Observable<{ message: string }> {
+    const url = `${this.api}/auth/logout`;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    });
+
+    return this.http.post<{ message: string }>(url, {}, { headers });
   }
 }
